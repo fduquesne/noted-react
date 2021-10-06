@@ -73,6 +73,7 @@
 
         .menu-items {
           .menu-item {
+            position: relative;
             display: flex;
             align-items: center;
             width: 100%;
@@ -83,8 +84,18 @@
             cursor: pointer;
 
             &.selected {
-              border-right: 4px solid $color-purple;
               color: $color-black;
+
+              &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 4px;
+                border-radius: 4px 0 0 4px;
+                background: $color-purple;
+              }
             }
 
             .menu-item-icon {
