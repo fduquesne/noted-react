@@ -16,3 +16,7 @@ plugins:
 settings:
   react:
     version: 17.0.2
+rules:
+  prettier/prettier:
+    - error
+    - endOfLine: auto
