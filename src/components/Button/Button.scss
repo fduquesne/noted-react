@@ -1,0 +1,32 @@
+@import '../../assets/scss/colors';
+
+.button {
+  cursor: pointer;
+
+  &.small {
+    height: 30px;
+
+    &.rounded {
+      border-radius: 15px;
+    }
+
+    .button-icon {
+      width: 30px;
+      padding: 6px;
+    }
+  }
+
+  &.default {
+    background: $color-grey-very-light;
+
+    &:hover {
+      background: $color-grey-light;
+    }
+  }
+
+  .button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
