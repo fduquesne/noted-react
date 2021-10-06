@@ -1,3 +1,14 @@
+@import './colors';
+
+@font-face {
+  font-family: 'SF Pro Regular';
+  src: url('../fonts/SF-Pro-Text-Regular.otf');
+}
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('../fonts/SF-Pro-Text-Semibold.otf');
+}
+
 html,
 body,
 #root,
@@ -6,9 +17,17 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  color: $color-black;
+  font-family: 'SF Pro Regular';
 }
 
 * {
   box-sizing: border-box;
   outline: none;
+}
+
+svg,
+img {
+  max-width: 100%;
+  max-height: 100%;
 }

@@ -1,4 +1,125 @@
+@import '../../assets/scss/colors';
+
 #homepage {
+  display: flex;
   width: 100%;
   height: 100%;
+
+  /**********************/
+  /*       MENU         */
+  /**********************/
+
+  #menu {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100%;
+    background: $color-grey-very-light;
+
+    #logo {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      padding: 30px;
+
+      #logo-icon {
+        width: 40px;
+        height: 100%;
+        padding: 10px;
+        border-radius: 10px 10px 10px 3px;
+        background: $color-purple;
+        color: $color-white;
+      }
+
+      #logo-text {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        height: 100%;
+        padding-left: 15px;
+        font-size: 20px;
+      }
+    }
+
+    #menu-group-container {
+      flex: 1;
+      width: 100%;
+
+      .menu-group {
+        width: 100%;
+        padding: 10px 0;
+
+        .menu-group-header {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 40px;
+          padding: 15px 30px;
+          color: $color-grey-dark;
+
+          .menu-group-title {
+            flex: 1;
+            font-family: 'SF Pro Semibold';
+            font-size: 14px;
+          }
+
+          .menu-group-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .menu-items {
+          .menu-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+            margin: 5px 0;
+            padding: 10px 30px 10px 26px;
+            color: $color-grey;
+            cursor: pointer;
+
+            &.selected {
+              border-right: 4px solid $color-purple;
+              color: $color-black;
+            }
+
+            .menu-item-icon {
+              width: 20px;
+              height: 100%;
+            }
+
+            .menu-item-title {
+              padding-left: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    #profile-panel {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      padding: 30px;
+
+      #profile-image {
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      #profile-name {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        padding: 0 10px;
+        font-size: 15px;
+      }
+    }
+  }
 }
