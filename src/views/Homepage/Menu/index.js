@@ -29,13 +29,13 @@ class Menu extends React.Component {
 
         <div id="menu-group-container">
           <MenuGroup>
-            <MenuItem title="All notes" icon="list" selected />
+            <MenuItem title="All notes" icon="list" />
             <MenuItem title="Trash" icon="trash" />
           </MenuGroup>
           <MenuGroup title="Groups" action={{ icon: 'plus', handle: this.addNewFolder }}>
             <MenuItem title="Application redesign" icon="folder" />
             <MenuItem title="Professional projects" icon="folder" />
-            <MenuItem title="To-do list" icon="folder" />
+            <MenuItem title="To-do list" icon="folder" selected />
             <MenuItem title="Ideas" icon="folder" />
           </MenuGroup>
         </div>

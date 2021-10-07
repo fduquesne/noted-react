@@ -133,4 +133,106 @@
       }
     }
   }
+
+  /**********************/
+  /*     NOTE LIST      */
+  /**********************/
+
+  #note-list {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 100%;
+    border-right: 2px solid $color-grey-very-light;
+
+    #note-list-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      padding: 30px;
+
+      #note-list-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        flex: 1;
+        padding: 5px 15px 10px 0;
+        font-family: 'SF Pro Semibold';
+        font-size: 30px;
+        line-height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    #note-list-search {
+      width: 100%;
+      padding: 12px 30px;
+
+      & > div {
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    #notes {
+      width: 100%;
+      padding: 12px 30px;
+      overflow: auto;
+
+      .note-item {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 5px;
+        background: $color-grey-very-light;
+        cursor: pointer;
+
+        &.selected {
+          border: 2px solid $color-purple;
+        }
+
+        .note-item-updated-at {
+          color: $color-grey;
+          font-size: 14px;
+        }
+
+        .note-item-title {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          padding: 5px 0 10px;
+          font-family: 'SF Pro Semibold';
+          font-size: 18px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .note-item-content {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          font-size: 15px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .note-item-tags {
+          display: flex;
+          padding-top: 10px;
+
+          .tag {
+            margin-right: 10px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }
