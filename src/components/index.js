@@ -1,5 +1,6 @@
 import Button from './Button/Button';
 import Icon from './Icon/Icon';
 import Input from './Input/Input';
+import Tag from './Tag/Tag';
 
-export { Button, Icon, Input };
+export { Button, Icon, Input, Tag };
