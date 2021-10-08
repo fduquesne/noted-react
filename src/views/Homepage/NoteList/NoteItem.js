@@ -13,7 +13,7 @@ class NoteItem extends React.Component {
       const currentYear = new Date(Date.now()).getFullYear();
 
       const date = new Date(Number(timestamp));
-      const day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+      const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
       const month = months[date.getMonth()];
 
       if (date.getFullYear() !== currentYear) return `${day} ${month} ${date.getFullYear()}`;

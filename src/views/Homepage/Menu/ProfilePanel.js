@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '../../../components';
+import { Avatar, Button } from '../../../components';
 
 class ProfilePanel extends React.Component {
   constructor() {
@@ -16,9 +16,7 @@ class ProfilePanel extends React.Component {
   render() {
     return (
       <div id="profile-panel">
-        <div id="profile-image">
-          <img src={require('../../../assets/img/profile1.jpg').default} alt="profile1" />
-        </div>
+        <Avatar user={{ image: 'profile1.jpg' }} size="medium" />
         <div id="profile-name">Florian Duquesne</div>
         <div id="profile-button">
           <Button icon="chevron-up" color="default" size="small" onClick={this.showDropdown} rounded />

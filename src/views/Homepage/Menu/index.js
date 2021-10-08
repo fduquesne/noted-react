@@ -30,6 +30,7 @@ class Menu extends React.Component {
         <div id="menu-group-container">
           <MenuGroup>
             <MenuItem title="All notes" icon="list" />
+            <MenuItem title="Shared notes" icon="users" />
             <MenuItem title="Trash" icon="trash" />
           </MenuGroup>
           <MenuGroup title="Groups" action={{ icon: 'plus', handle: this.addNewFolder }}>

@@ -31,7 +31,7 @@ class NoteList extends React.Component {
         </div>
         <div id="notes">
           {notes.map((note, index) => (
-            <NoteItem key={note.id} note={note} selected={index === 0} />
+            <NoteItem key={note.title} note={note} selected={index === 0} />
           ))}
         </div>
       </div>

@@ -28,7 +28,7 @@
         height: 100%;
         padding: 10px;
         border-radius: 10px 10px 10px 3px;
-        background: $color-purple;
+        background: $color-primary;
         color: $color-white;
       }
 
@@ -94,7 +94,7 @@
                 bottom: 0;
                 width: 4px;
                 border-radius: 4px 0 0 4px;
-                background: $color-purple;
+                background: $color-primary;
               }
             }
 
@@ -117,12 +117,6 @@
       width: 100%;
       height: 100px;
       padding: 30px;
-
-      #profile-image {
-        height: 100%;
-        border-radius: 50%;
-        overflow: hidden;
-      }
 
       #profile-name {
         display: flex;
@@ -192,7 +186,7 @@
         cursor: pointer;
 
         &.selected {
-          border: 2px solid $color-purple;
+          border: 2px solid $color-primary;
         }
 
         .note-item-updated-at {
@@ -233,6 +227,87 @@
           }
         }
       }
+    }
+  }
+
+  /**********************/
+  /*  NOTE VIEW PANEL   */
+  /**********************/
+
+  #note-view-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+
+    #note-view-header {
+      display: flex;
+      align-items: center;
+      height: 100px;
+      padding: 30px;
+
+      #note-title {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        font-size: 40px;
+        font-family: 'SF Pro Semibold';
+
+        .button {
+          margin-left: 20px;
+        }
+      }
+
+      #note-actions {
+        display: flex;
+
+        .button {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    #note-all-metadata {
+      padding: 0 30px 30px;
+
+      .note-metadata {
+        display: flex;
+        height: 40px;
+        align-items: center;
+
+        .note-metadata-label {
+          width: 150px;
+          color: $color-grey;
+        }
+
+        .note-metadata-value {
+          display: flex;
+          flex: 1;
+          align-items: center;
+
+          .avatar {
+            margin-right: 10px;
+          }
+
+          .tag {
+            margin-right: 10px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    #note-view {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      width: 100%;
+      padding: 0 30px 30px;
+      border-top: 2px solid $color-grey-very-light;
+      overflow-y: auto;
     }
   }
 }

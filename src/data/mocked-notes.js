@@ -1,10 +1,12 @@
+import { mockedMarkdown } from './mocked-md';
+
 export default [
   {
     title: 'Birthday gifts',
     updatedAt: '1633721804000',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Posuere morbi leo urna molestie.',
+    content: mockedMarkdown,
     tags: ['birthday'],
+    author: { name: 'Florian Duquesne', image: 'profile1.jpg' },
   },
   {
     title: 'Shopping list',

@@ -51,11 +51,20 @@
   }
 
   &.primary {
-    background: $color-purple;
+    background: $color-primary;
     color: $color-white;
 
     &:hover {
-      background: $color-purple-dark;
+      background: $color-primary-dark;
+    }
+  }
+
+  &.danger {
+    background: $color-danger;
+    color: $color-white;
+
+    &:hover {
+      background: $color-danger-dark;
     }
   }
 
