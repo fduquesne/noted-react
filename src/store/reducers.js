@@ -2,17 +2,17 @@ const reducers = {
   SET_CURRENT_USER(state, { user }) {
     return { ...state, currentUser: user };
   },
-  SET_SELECTED_FOLDER(state, { folderId }) {
-    return { ...state, selectedFolder: folderId };
+  SET_SELECTED_FOLDER(state, { folder }) {
+    return { ...state, selectedFolder: folder };
   },
   SET_SELECTED_NOTE(state, { note }) {
     return { ...state, selectedNote: note };
   },
-  SET_NOTE_LIST(state, { notes }) {
-    return { ...state, noteList: notes };
+  ADD_NOTE(state, { note }) {
+    return { ...state, allNotes: [...state.allNotes, note], noteListToShow: [...state.noteListToShow, note] };
   },
-  SET_APP_LOADED(state) {
-    return { ...state, app: { ...state.app, isLoaded: true } };
+  SET_NOTE_LIST_TO_SHOW(state, { notes }) {
+    return { ...state, noteListToShow: notes };
   },
 };
 

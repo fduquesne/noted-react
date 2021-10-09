@@ -6,7 +6,7 @@ class NoteView extends React.Component {
   render() {
     const { note } = this.props;
 
-    return <div id="note-view" dangerouslySetInnerHTML={{ __html: marked(note.content) }} />;
+    return <div id="note-view" dangerouslySetInnerHTML={note.content && { __html: marked(note.content) }} />;
   }
 }
 

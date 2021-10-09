@@ -16,10 +16,6 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { isAppLoaded } = this.props;
-
-    if (!isAppLoaded) return <></>;
-
     return (
       <div id="homepage">
         <Menu />
@@ -32,9 +28,6 @@ class Homepage extends React.Component {
 
 Homepage.propTypes = {
   dispatch: PropTypes.func,
-  isAppLoaded: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({ isAppLoaded: state.app.isLoaded });
-
-export default connect(mapStateToProps)(Homepage);
+export default connect()(Homepage);

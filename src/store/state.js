@@ -1,11 +1,9 @@
 const state = {
   currentUser: {},
-  selectedFolder: '',
+  selectedFolder: { id: 'all-notes', name: 'All notes' },
   selectedNote: {},
-  noteList: [],
-  app: {
-    isLoaded: false,
-  },
+  noteListToShow: [],
+  allNotes: [],
 };
 
 export default state;

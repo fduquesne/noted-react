@@ -26,9 +26,7 @@ class NoteItem extends React.Component {
         <div className="note-item-title">{note.title}</div>
         <div className="note-item-content">{note.content}</div>
         <div className="note-item-tags">
-          {note.tags.map(label => (
-            <Tag key={label} label={label} />
-          ))}
+          {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
         </div>
       </div>
     );

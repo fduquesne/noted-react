@@ -1,43 +1,50 @@
+import { onValue, ref } from 'firebase/database';
+
+import db from '../config/firebase';
 import store from '../store';
 
-import mockedNotes from '../data/mocked-notes';
-import mockedUser from '../data/mocked-user';
+const getNotesByFolder = folder => {
+  const notes = store.getState().allNotes;
 
-const getAllNotes = () => {
-  return mockedUser.notes.map(note => ({ ...mockedNotes.find(({ id }) => note.id === id), folder: note.folder }));
-};
+  if (folder.id === 'all-notes') return notes.filter(note => !note.isTrashed);
+  if (folder.id === 'shared') return [];
+  if (folder.id === 'trash') return notes.filter(note => note.isTrashed);
 
-const getNotesByFolderId = folderId => {
-  if (folderId === 'all-notes') return getAllNotes().filter(note => !note.isTrashed);
-  if (folderId === 'shared') return [];
-  if (folderId === 'trash') return getAllNotes().filter(note => note.isTrashed);
-  return getAllNotes().filter(note => !note.isTrashed && note.folder === folderId);
+  return notes.filter(note => !note.isTrashed && note.folder === folder.id);
 };
 
 const actions = {
   sync() {
-    const notes = getAllNotes();
-
     return dispatch => {
-      dispatch({ type: 'SET_CURRENT_USER', user: mockedUser });
-      dispatch({ type: 'SET_SELECTED_NOTE', note: notes[0] });
-      dispatch({ type: 'SET_SELECTED_FOLDER', folderId: 'all-notes' });
-      dispatch({ type: 'SET_NOTE_LIST', notes });
+      onValue(ref(db, '/users'), snapUser => {
+        const user = snapUser.val()['1633787658'];
 
-      dispatch({ type: 'SET_APP_LOADED' });
+        dispatch({ type: 'SET_CURRENT_USER', user });
+
+        user.notes.forEach(note => {
+          onValue(ref(db, `/notes/${note.id}`), snapNote => {
+            dispatch({ type: 'ADD_NOTE', note: snapNote.val() });
+            if (!store.getState().selectedNote.id) dispatch({ type: 'SET_SELECTED_NOTE', note: snapNote.val() });
+          });
+        });
+      });
     };
   },
-  selectFolder(folderId) {
-    const notes = getNotesByFolderId(folderId);
+
+  selectFolder(folder) {
+    const notes = getNotesByFolder(folder);
     const currentSelectedNote = store.getState().selectedNote;
-    const newSelectedNote = notes.find(n => currentSelectedNote && n.id === currentSelectedNote.id) || notes[0];
+    const newSelectedNote = notes.length
+      ? notes.find(n => currentSelectedNote && n.id === currentSelectedNote.id) || notes[0]
+      : currentSelectedNote;
 
     return dispatch => {
-      dispatch({ type: 'SET_SELECTED_FOLDER', folderId });
-      dispatch({ type: 'SET_NOTE_LIST', notes });
+      dispatch({ type: 'SET_SELECTED_FOLDER', folder });
+      dispatch({ type: 'SET_NOTE_LIST_TO_SHOW', notes });
       dispatch({ type: 'SET_SELECTED_NOTE', note: newSelectedNote });
     };
   },
+
   selectNote(note) {
     return dispatch => dispatch({ type: 'SET_SELECTED_NOTE', note });
   },

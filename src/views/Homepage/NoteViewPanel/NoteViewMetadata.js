@@ -38,9 +38,7 @@ class NoteEditorMetadata extends React.Component {
         <div className="note-metadata">
           <div className="note-metadata-label">Tags</div>
           <div className="note-metadata-value">
-            {note.tags.map(tag => (
-              <Tag key={tag} label={tag} />
-            ))}
+            {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
 
             <Button icon="plus" color="default" size="small" onClick={this.showNoteTagsUpdatePopup} rounded />
           </div>

@@ -14,6 +14,12 @@ class Menu extends React.Component {
   render() {
     const { dispatch, currentUser, selectedFolder } = this.props;
 
+    const standardFolders = [
+      { id: 'all-notes', name: 'All notes', icon: 'list' },
+      { id: 'shared-notes', name: 'Shared notes', icon: 'users' },
+      { id: 'trash', name: 'Trash', icon: 'trash' },
+    ];
+
     const addNewFolder = () => {
       console.log('ADD NEW FOLDER');
     };
@@ -33,36 +39,28 @@ class Menu extends React.Component {
 
         <div id="menu-group-container">
           <MenuGroup>
-            <MenuItem
-              title="All notes"
-              icon="list"
-              onClick={() => selectFolder('all-notes')}
-              selected={selectedFolder === 'all-notes'}
-            />
-            <MenuItem
-              title="Shared notes"
-              icon="users"
-              onClick={() => selectFolder('shared-notes')}
-              selected={selectedFolder === 'shared-notes'}
-            />
-            <MenuItem
-              title="Trash"
-              icon="trash"
-              onClick={() => selectFolder('trash')}
-              selected={selectedFolder === 'trash'}
-            />
-          </MenuGroup>
-
-          <MenuGroup title="Groups" action={{ icon: 'plus', handle: addNewFolder }}>
-            {currentUser.folders.map(folder => (
+            {standardFolders.map(folder => (
               <MenuItem
                 key={folder.id}
                 title={folder.name}
-                icon="folder"
-                onClick={() => selectFolder(folder.id)}
-                selected={selectedFolder === folder.id}
+                icon={folder.icon}
+                onClick={() => selectFolder(folder)}
+                selected={selectedFolder.id === folder.id}
               />
             ))}
+          </MenuGroup>
+
+          <MenuGroup title="Groups" action={{ icon: 'plus', handle: addNewFolder }}>
+            {currentUser.folders &&
+              currentUser.folders.map(folder => (
+                <MenuItem
+                  key={folder.id}
+                  title={folder.name}
+                  icon="folder"
+                  onClick={() => selectFolder(folder)}
+                  selected={selectedFolder.id === folder.id}
+                />
+              ))}
           </MenuGroup>
         </div>
 
@@ -75,7 +73,7 @@ class Menu extends React.Component {
 Menu.propTypes = {
   dispatch: PropTypes.func,
   currentUser: PropTypes.object,
-  selectedFolder: PropTypes.string,
+  selectedFolder: PropTypes.object,
 };
 
 const mapStateToProps = ({ currentUser, selectedFolder }) => ({ currentUser, selectedFolder });
