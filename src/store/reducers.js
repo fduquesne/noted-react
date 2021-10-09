@@ -1,4 +1,7 @@
 const reducers = {
+  SET_APP_LOADED(state) {
+    return { ...state, isAppLoaded: true };
+  },
   SET_CURRENT_USER(state, { user }) {
     return { ...state, currentUser: user };
   },
@@ -30,6 +33,18 @@ const reducers = {
       currentUser: {
         ...state.currentUser,
         notes: state.currentUser.notes ? [...state.currentUser.notes, { id: note.id }] : [{ id: note.id }],
+      },
+    };
+  },
+  DELETE_NOTE(state, { noteId }) {
+    return {
+      ...state,
+      allNotes: state.allNotes.filter(n => n.id !== noteId),
+      noteListToShow: state.noteListToShow.filter(n => n.id !== noteId),
+      selectedNote: undefined,
+      currentUser: {
+        ...state.currentUser,
+        notes: state.currentUser.notes.filter(n => n.id !== noteId),
       },
     };
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Tag } from '../../../components';
+import { Avatar } from '../../../components';
 
 class NoteEditorMetadata extends React.Component {
   constructor() {
@@ -24,25 +24,25 @@ class NoteEditorMetadata extends React.Component {
 
     return (
       <div id="note-all-metadata">
-        {/* <div className="note-metadata">
+        <div className="note-metadata">
           <div className="note-metadata-label">Author</div>
           <div className="note-metadata-value">
             <Avatar user={note.author} size="small" />
             {note.author.name}
           </div>
-        </div> */}
+        </div>
         <div className="note-metadata">
           <div className="note-metadata-label">Last updated</div>
           <div className="note-metadata-value">{formatDate(note.updatedAt)}</div>
         </div>
-        <div className="note-metadata">
+        {/* <div className="note-metadata">
           <div className="note-metadata-label">Tags</div>
           <div className="note-metadata-value">
             {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
 
             <Button icon="plus" color="default" size="small" onClick={this.showNoteTagsUpdatePopup} rounded />
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

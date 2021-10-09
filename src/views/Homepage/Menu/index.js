@@ -6,7 +6,7 @@ import actions from '../../../store/actions';
 
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
-// import ProfilePanel from './ProfilePanel';
+import ProfilePanel from './ProfilePanel';
 
 import { Icon } from '../../../components';
 
@@ -64,7 +64,7 @@ class Menu extends React.Component {
           </MenuGroup>
         </div>
 
-        {/* <ProfilePanel /> */}
+        <ProfilePanel />
       </div>
     );
   }

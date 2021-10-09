@@ -1,29 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { Avatar, Button } from '../../../components';
+import { Avatar } from '../../../components';
 
 class ProfilePanel extends React.Component {
-  constructor() {
-    super();
-
-    this.showDropdown = this.showDropdown.bind(this);
-  }
-
-  showDropdown() {
-    console.log('SHOW PROFILE DROPDOWN');
-  }
-
   render() {
+    const { currentUser } = this.props;
+
     return (
       <div id="profile-panel">
-        <Avatar user={{ image: 'profile1.jpg' }} size="medium" />
-        <div id="profile-name">Florian Duquesne</div>
+        <Avatar user={currentUser} size="medium" />
+        <div id="profile-name">{currentUser.name}</div>
         <div id="profile-button">
-          <Button icon="chevron-up" color="default" size="small" onClick={this.showDropdown} rounded />
+          {/* <Button icon="chevron-up" color="default" size="small" onClick={this.showDropdown} rounded /> */}
         </div>
       </div>
     );
   }
 }
 
-export default ProfilePanel;
+ProfilePanel.propTypes = {
+  currentUser: PropTypes.object,
+};
+
+const mapStateToProps = ({ currentUser }) => ({ currentUser });
+
+export default connect(mapStateToProps)(ProfilePanel);

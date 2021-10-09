@@ -1,4 +1,4 @@
-import { ref, set, get } from 'firebase/database';
+import { ref, set, get, remove } from 'firebase/database';
 
 import db from '../config/firebase';
 import store from '../store';
@@ -28,6 +28,8 @@ const actions = {
         dispatch({ type: 'SET_ALL_NOTES', notes });
         dispatch({ type: 'SET_NOTE_LIST_TO_SHOW', notes });
       }
+
+      dispatch({ type: 'SET_APP_LOADED' });
     };
   },
 
@@ -71,7 +73,7 @@ const actions = {
         const note = {
           id: now,
           title: noteTitle,
-          author: { id: user.id, name: user.name },
+          author: { id: user.id, name: user.name, image: user.image },
           folder: folderId,
           updatedAt: now,
           isTrashed: false,
@@ -84,6 +86,18 @@ const actions = {
       }
 
       dispatch({ type: 'CLOSE_POPUP' });
+    };
+  },
+
+  deleteNote() {
+    return dispatch => {
+      const userId = store.getState().currentUser.id;
+      const noteId = store.getState().selectedNote.id;
+
+      dispatch({ type: 'DELETE_NOTE', noteId });
+
+      remove(ref(db, `/notes/${noteId}`));
+      set(ref(db, `/users/${userId}`), store.getState().currentUser);
     };
   },
 
