@@ -21,6 +21,18 @@ const reducers = {
       currentUser: { ...state.currentUser, folders: [...folders, { id: Date.now(), name: folderName }] },
     };
   },
+  ADD_NEW_NOTE(state, { note }) {
+    return {
+      ...state,
+      allNotes: [...state.allNotes, note],
+      noteListToShow: [...state.noteListToShow, note],
+      selectedNote: note,
+      currentUser: {
+        ...state.currentUser,
+        notes: state.currentUser.notes ? [...state.currentUser.notes, { id: note.id }] : [{ id: note.id }],
+      },
+    };
+  },
   SHOW_POPUP(state, { popup }) {
     return { ...state, currentPopup: popup };
   },

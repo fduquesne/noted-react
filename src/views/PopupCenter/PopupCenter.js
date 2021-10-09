@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import actions from '../../store/actions';
 
 import CreateNewFolderPopup from './CreateNewFolderPopup';
+import CreateNewNotePopup from './CreateNewNotePopup';
 
 import './PopupCenter.scss';
 
@@ -18,7 +19,7 @@ class PopupCenter extends React.Component {
       <div id="popup-center">
         <div id="blur" onClick={() => dispatch(actions.closePopup())} />
         {currentPopup === 'CREATE_NEW_FOLDER' && <CreateNewFolderPopup />}
-        {/* {currentPopup === 'CREATE_NEW_NOTE' && <CreateNewNotePopup />} */}
+        {currentPopup === 'CREATE_NEW_NOTE' && <CreateNewNotePopup />}
       </div>
     );
   }

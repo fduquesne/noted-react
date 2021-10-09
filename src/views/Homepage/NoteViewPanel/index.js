@@ -12,9 +12,13 @@ class NoteViewPanel extends React.Component {
 
     return (
       <div id="note-view-panel">
-        <NoteViewHeader note={selectedNote} />
-        <NoteViewMetadata note={selectedNote} />
-        <NoteView note={selectedNote} />
+        {selectedNote && (
+          <>
+            <NoteViewHeader note={selectedNote} />
+            <NoteViewMetadata note={selectedNote} />
+            <NoteView note={selectedNote} />
+          </>
+        )}
       </div>
     );
   }

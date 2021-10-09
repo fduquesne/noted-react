@@ -6,14 +6,14 @@ import actions from '../../../store/actions';
 
 import NoteItem from './NoteItem';
 
-import { Button, Input } from '../../../components';
+import { Button } from '../../../components';
 
 class NoteList extends React.Component {
   render() {
     const { dispatch, noteListToShow, selectedNote, selectedFolder } = this.props;
 
     const addNewNote = () => {
-      console.log('ADD NEW NOTE');
+      dispatch(actions.showCreateNewNotePopup());
     };
 
     const selectNote = note => {
@@ -30,16 +30,16 @@ class NoteList extends React.Component {
             </div>
           )}
         </div>
-        <div id="note-list-search">
+        {/* <div id="note-list-search">
           <Input icon="search" placeholder="Search notes..." value="" onChange={() => {}} />
-        </div>
+        </div> */}
         <div id="notes">
           {noteListToShow.map(note => (
             <NoteItem
-              key={note.title}
+              key={note.id}
               note={note}
               onClick={() => selectNote(note)}
-              selected={selectedNote.id === note.id}
+              selected={selectedNote && selectedNote.id === note.id}
             />
           ))}
         </div>
