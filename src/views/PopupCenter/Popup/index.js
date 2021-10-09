@@ -12,8 +12,12 @@ class Popup extends React.Component {
 
     const closePopup = () => dispatch(actions.closePopup());
 
+    const handleKeyDown = e => {
+      if (e.key === 'Enter') submit.handle();
+    };
+
     return (
-      <div className="popup">
+      <div className="popup" onKeyDown={handleKeyDown}>
         <div className="popup-header">
           <div className="popup-title">{title}</div>
           <div className="popup-close">
