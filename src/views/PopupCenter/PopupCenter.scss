@@ -1,0 +1,66 @@
+@import '../../assets/scss/colors';
+
+#popup-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  #blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: unquote($color-grey-light + 'aa');
+    z-index: 50;
+  }
+
+  .popup {
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px $color-grey-light;
+    background: $color-white;
+    z-index: 100;
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      padding: 0 15px;
+      border-bottom: 2px solid $color-grey-very-light;
+
+      .popup-title {
+        flex: 1;
+        font-family: 'SF Pro Semibold';
+      }
+    }
+
+    .popup-body {
+      padding: 15px;
+    }
+
+    .popup-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      height: 60px;
+      padding: 0 15px;
+      border-top: 2px solid $color-grey-very-light;
+
+      .button {
+        margin-left: 10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

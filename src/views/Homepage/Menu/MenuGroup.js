@@ -26,7 +26,7 @@ class MenuGroup extends React.Component {
 }
 
 MenuGroup.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
   action: PropTypes.object,
   title: PropTypes.string,
 };

@@ -31,7 +31,7 @@ class NoteList extends React.Component {
           )}
         </div>
         <div id="note-list-search">
-          <Input icon="search" placeholder="Search notes..." />
+          <Input icon="search" placeholder="Search notes..." value="" onChange={() => {}} />
         </div>
         <div id="notes">
           {noteListToShow.map(note => (

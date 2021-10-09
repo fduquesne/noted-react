@@ -20,8 +20,8 @@ class Menu extends React.Component {
       { id: 'trash', name: 'Trash', icon: 'trash' },
     ];
 
-    const addNewFolder = () => {
-      console.log('ADD NEW FOLDER');
+    const showCreateNewFolderPopup = () => {
+      dispatch(actions.showCreateNewFolderPopup());
     };
 
     const selectFolder = id => {
@@ -50,7 +50,7 @@ class Menu extends React.Component {
             ))}
           </MenuGroup>
 
-          <MenuGroup title="Groups" action={{ icon: 'plus', handle: addNewFolder }}>
+          <MenuGroup title="Groups" action={{ icon: 'plus', handle: showCreateNewFolderPopup }}>
             {currentUser.folders &&
               currentUser.folders.map(folder => (
                 <MenuItem

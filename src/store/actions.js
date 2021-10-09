@@ -1,4 +1,4 @@
-import { onValue, ref } from 'firebase/database';
+import { ref, set, get } from 'firebase/database';
 
 import db from '../config/firebase';
 import store from '../store';
@@ -15,19 +15,17 @@ const getNotesByFolder = folder => {
 
 const actions = {
   sync() {
-    return dispatch => {
-      onValue(ref(db, '/users'), snapUser => {
-        const user = snapUser.val()['1633787658'];
+    return async dispatch => {
+      const userSnap = await get(ref(db, '/users'));
+      const user = userSnap.val()['1633787658'];
+      dispatch({ type: 'SET_CURRENT_USER', user });
 
-        dispatch({ type: 'SET_CURRENT_USER', user });
+      const notesSnap = await Promise.all(user.notes.map(note => get(ref(db, `/notes/${note.id}`))));
+      const notes = notesSnap.map(snap => snap.val());
 
-        user.notes.forEach(note => {
-          onValue(ref(db, `/notes/${note.id}`), snapNote => {
-            dispatch({ type: 'ADD_NOTE', note: snapNote.val() });
-            if (!store.getState().selectedNote.id) dispatch({ type: 'SET_SELECTED_NOTE', note: snapNote.val() });
-          });
-        });
-      });
+      dispatch({ type: 'SET_SELECTED_NOTE', note: notes[0] });
+      dispatch({ type: 'SET_ALL_NOTES', notes });
+      dispatch({ type: 'SET_NOTE_LIST_TO_SHOW', notes });
     };
   },
 
@@ -47,6 +45,27 @@ const actions = {
 
   selectNote(note) {
     return dispatch => dispatch({ type: 'SET_SELECTED_NOTE', note });
+  },
+
+  createNewFolder(folderName) {
+    return dispatch => {
+      if (folderName !== '') {
+        dispatch({ type: 'ADD_NEW_FOLDER', folderName });
+
+        const user = store.getState().currentUser;
+        set(ref(db, `/users/${user.id}`), user);
+      }
+
+      dispatch({ type: 'CLOSE_POPUP' });
+    };
+  },
+
+  showCreateNewFolderPopup() {
+    return dispatch => dispatch({ type: 'SHOW_POPUP', popup: 'CREATE_NEW_FOLDER' });
+  },
+
+  closePopup() {
+    return dispatch => dispatch({ type: 'CLOSE_POPUP' });
   },
 };
 
