@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import NoteViewHeader from './NoteViewHeader';
 import NoteViewMetadata from './NoteViewMetadata';
@@ -7,20 +8,22 @@ import NoteView from './NoteView';
 
 class NoteViewPanel extends React.Component {
   render() {
-    const { note } = this.props;
+    const { selectedNote } = this.props;
 
     return (
       <div id="note-view-panel">
-        <NoteViewHeader note={note} />
-        <NoteViewMetadata note={note} />
-        <NoteView note={note} />
+        <NoteViewHeader note={selectedNote} />
+        <NoteViewMetadata note={selectedNote} />
+        <NoteView note={selectedNote} />
       </div>
     );
   }
 }
 
 NoteViewPanel.propTypes = {
-  note: PropTypes.object.isRequired,
+  selectedNote: PropTypes.object,
 };
 
-export default NoteViewPanel;
+const mapStateToProps = ({ selectedNote }) => ({ selectedNote });
+
+export default connect(mapStateToProps)(NoteViewPanel);

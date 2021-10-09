@@ -6,7 +6,7 @@ import { Tag } from '../../../components';
 
 class NoteItem extends React.Component {
   render() {
-    const { note, selected } = this.props;
+    const { note, selected, onClick } = this.props;
 
     const formatDate = timestamp => {
       const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEB', 'OCT', 'NOV', 'DEC'];
@@ -21,7 +21,7 @@ class NoteItem extends React.Component {
     };
 
     return (
-      <div className={cx('note-item', { selected })}>
+      <div className={cx('note-item', { selected, hidden: note.isHidden })} onClick={onClick}>
         <div className="note-item-updated-at">{formatDate(note.updatedAt)}</div>
         <div className="note-item-title">{note.title}</div>
         <div className="note-item-content">{note.content}</div>
@@ -38,6 +38,7 @@ class NoteItem extends React.Component {
 NoteItem.propTypes = {
   note: PropTypes.object.isRequired,
   selected: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default NoteItem;

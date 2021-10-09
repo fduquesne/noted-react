@@ -6,10 +6,10 @@ import { Icon } from '../../../components';
 
 class MenuItem extends React.Component {
   render() {
-    const { icon, selected, title } = this.props;
+    const { icon, onClick, selected, title } = this.props;
 
     return (
-      <div className={cx('menu-item', { selected })}>
+      <div className={cx('menu-item', { selected })} onClick={onClick}>
         <div className="menu-item-icon">
           <Icon name={icon} />
         </div>
@@ -21,6 +21,7 @@ class MenuItem extends React.Component {
 
 MenuItem.propTypes = {
   icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool,
   title: PropTypes.string.isRequired,
 };
