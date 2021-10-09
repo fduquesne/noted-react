@@ -1,0 +1,41 @@
+@import '../../assets/scss/colors';
+
+.dropdown {
+  position: relative;
+
+  .dropdown-items {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    min-width: 200px;
+    padding: 10px 0;
+    border: 1px solid $color-grey-light;
+    border-radius: 10px;
+    background: $color-white;
+    cursor: pointer;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      padding: 0 10px;
+
+      &:hover {
+        background: $color-grey-very-light;
+      }
+
+      &.danger {
+        color: $color-danger;
+      }
+
+      .dropdown-item-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 12px;
+      }
+    }
+  }
+}
