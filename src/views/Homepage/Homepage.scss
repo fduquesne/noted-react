@@ -286,6 +286,14 @@
             }
           }
         }
+
+        #note-editor-main-actions {
+          display: flex;
+
+          .button {
+            margin-left: 10px;
+          }
+        }
       }
 
       #editor {
@@ -300,6 +308,10 @@
           font-family: 'SF Pro Regular';
           font-size: 18px;
           resize: none;
+        }
+
+        #note-view {
+          padding: 0;
         }
       }
     }

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import NoteViewHeader from './NoteViewHeader';
 import NoteViewMetadata from './NoteViewMetadata';
-import NoteView from './NoteView';
-// import NoteEditor from './NoteEditor';
+// import NoteView from './NoteView';
+import NoteEditor from './NoteEditor';
 
 class NoteViewPanel extends React.Component {
   render() {
@@ -19,8 +19,8 @@ class NoteViewPanel extends React.Component {
           <>
             <NoteViewHeader note={note} />
             <NoteViewMetadata note={note} />
-            <NoteView note={note} />
-            {/* <NoteEditor note={note} /> */}
+            {/* <NoteView note={note} /> */}
+            <NoteEditor note={note} />
           </>
         )}
       </div>
