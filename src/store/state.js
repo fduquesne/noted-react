@@ -1,11 +1,14 @@
 const state = {
-  currentPopup: undefined,
+  currentPopup: '',
   currentUser: undefined,
-  selectedFolder: { id: 'all-notes', name: 'All notes' },
-  selectedNote: undefined,
-  noteListToShow: [],
-  allNotes: [],
-  isAppLoaded: false,
+  selectedFolder: 'all-notes',
+  notes: {
+    all: [],
+    selected: '',
+  },
+  app: {
+    isLoaded: false,
+  },
 };
 
 export default state;

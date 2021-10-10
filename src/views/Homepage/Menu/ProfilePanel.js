@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Avatar } from '../../../components';
+import { Avatar, Button } from '../../../components';
 
 class ProfilePanel extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class ProfilePanel extends React.Component {
         <Avatar user={currentUser} size="medium" />
         <div id="profile-name">{currentUser.name}</div>
         <div id="profile-button">
-          {/* <Button icon="chevron-up" color="default" size="small" onClick={this.showDropdown} rounded /> */}
+          <Button icon="chevron-down" color="default" size="small" onClick={() => {}} rounded />
         </div>
       </div>
     );

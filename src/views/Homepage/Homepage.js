@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import actions from '../../store/actions';
 
 import Menu from './Menu';
-import NoteList from './NoteList';
-import NoteViewPanel from './NoteViewPanel';
+// import NoteList from './NoteList';
+// import NoteViewPanel from './NoteViewPanel';
 
 import './Homepage.scss';
 
@@ -23,8 +23,8 @@ class Homepage extends React.Component {
     return (
       <div id="homepage">
         <Menu />
-        <NoteList />
-        <NoteViewPanel />
+        {/* <NoteList />
+        <NoteViewPanel /> */}
       </div>
     );
   }
@@ -35,6 +35,6 @@ Homepage.propTypes = {
   isAppLoaded: PropTypes.bool,
 };
 
-const mapStateToProps = ({ isAppLoaded }) => ({ isAppLoaded });
+const mapStateToProps = ({ app }) => ({ isAppLoaded: app.isLoaded });
 
 export default connect(mapStateToProps)(Homepage);
