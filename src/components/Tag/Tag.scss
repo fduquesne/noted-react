@@ -3,9 +3,10 @@
 .tag {
   display: flex;
   align-items: center;
-  height: 35px;
-  padding: 0 10px;
-  background: $color-primary;
-  color: $color-white;
-  font-size: 15px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 3px;
+  background: $color-grey;
+  color: $color-black-light;
+  font-size: 14px;
 }

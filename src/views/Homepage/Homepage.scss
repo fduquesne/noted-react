@@ -58,7 +58,7 @@
           width: 100%;
           margin: 5px 0;
           padding: 20px 35px;
-          color: $color-grey;
+          color: $color-black-very-light;
           cursor: pointer;
 
           &.selected {
@@ -86,47 +86,36 @@
   #note-list {
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: 400px;
     height: 100%;
-    border-right: 2px solid $color-grey-very-light;
+    border-right: 2px solid $color-grey-light;
 
     #note-list-header {
       display: flex;
       align-items: center;
       width: 100%;
-      height: 100px;
-      padding: 30px;
+      padding: 35px 20px;
 
       #note-list-title {
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         flex: 1;
-        padding: 5px 15px 10px 0;
+        height: 40px;
         font-family: 'SF Pro Semibold';
         font-size: 30px;
-        line-height: 100px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
     }
 
-    #note-list-search {
-      width: 100%;
-      padding: 12px 30px;
-
-      & > div {
-        margin-right: 10px;
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
+    #add-new-note {
+      padding: 0 20px;
     }
 
     #notes {
       width: 100%;
-      padding: 12px 30px;
+      padding: 20px;
       overflow: auto;
 
       .note-item {
@@ -135,22 +124,20 @@
         padding: 15px;
         border-radius: 5px;
         background: $color-grey-very-light;
+        color: $color-black-very-light;
         cursor: pointer;
 
-        &.selected::after {
-          content: '';
-          position: absolute;
-          top: -2px;
-          left: -2px;
-          width: calc(100% + 4px);
-          height: calc(100% + 4px);
-          border-radius: 7px;
-          background: $color-primary;
-          z-index: -1;
+        &.selected {
+          background: $color-grey-light;
+          color: $color-black;
+        }
+
+        &:not(.selected) .tag {
+          background: $color-grey-light;
+          color: $color-black-very-light;
         }
 
         .note-item-updated-at {
-          color: $color-grey;
           font-size: 14px;
         }
 
@@ -203,32 +190,24 @@
     #note-view-header {
       display: flex;
       align-items: center;
-      height: 100px;
-      padding: 30px;
+      width: 100%;
+      padding: 35px 50px;
 
       #note-title {
-        display: flex;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
         flex: 1;
-        align-items: center;
-        font-size: 40px;
+        height: 40px;
         font-family: 'SF Pro Semibold';
-
-        .button {
-          margin-left: 20px;
-        }
-      }
-
-      #note-actions {
-        display: flex;
-
-        .button {
-          margin-left: 20px;
-        }
+        font-size: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
     #note-all-metadata {
-      padding: 0 30px 30px;
+      padding: 0 50px 30px;
       font-size: 15px;
 
       .note-metadata {
@@ -238,7 +217,7 @@
 
         .note-metadata-label {
           width: 150px;
-          color: $color-grey;
+          color: $color-black-very-light;
         }
 
         .note-metadata-value {
@@ -266,9 +245,63 @@
       flex: 1;
       flex-direction: column;
       width: 100%;
-      padding: 0 30px 30px;
-      border-top: 2px solid $color-grey-very-light;
+      padding: 0 50px 30px;
       overflow-y: auto;
+    }
+
+    #note-editor {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      width: 100%;
+      padding: 0 50px 30px;
+
+      #note-editor-actions {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        border-top: 2px solid $color-grey;
+        border-bottom: 2px solid $color-grey;
+
+        .node-editor-actions-divider {
+          flex: 1;
+        }
+
+        .node-editor-actions-group {
+          display: flex;
+          padding: 0 10px;
+          border-right: 1px solid $color-grey;
+
+          &:last-child {
+            border: none;
+          }
+
+          .button {
+            margin-right: 5px;
+            background: $color-white;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+
+      #editor {
+        flex: 1;
+        width: 100%;
+        padding-top: 20px;
+
+        textarea {
+          width: 100%;
+          height: 100%;
+          border: none;
+          font-family: 'SF Pro Regular';
+          font-size: 18px;
+          resize: none;
+        }
+      }
     }
   }
 }
