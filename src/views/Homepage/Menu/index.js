@@ -35,7 +35,7 @@ class Menu extends React.Component {
                   key={folder.id}
                   title={folder.name}
                   icon={folder.icon}
-                  onClick={() => selectFolder(folder)}
+                  onClick={() => selectFolder(folder.id)}
                   selected={selectedFolder === folder.id}
                 />
               ))}
@@ -56,7 +56,7 @@ class Menu extends React.Component {
 Menu.propTypes = {
   dispatch: PropTypes.func,
   currentUser: PropTypes.object,
-  selectedFolder: PropTypes.string,
+  selectedFolder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 const mapStateToProps = ({ currentUser, selectedFolder }) => ({ currentUser, selectedFolder });
