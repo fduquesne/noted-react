@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import actions from '../../../store/actions';
 
 import NoteView from './NoteView';
 
@@ -12,14 +15,26 @@ class NoteEditor extends React.Component {
     this.state = { showPreview: false, noteContent: props.note.content };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
+    this.cancelNoteEdition = this.cancelNoteEdition.bind(this);
+    this.saveNoteContent = this.saveNoteContent.bind(this);
   }
 
   handleChange(e) {
     this.setState({ noteContent: e.target.value });
   }
+  handleKeyDown(e) {
+    if (e.keyCode === 13 && e.ctrlKey) this.saveNoteContent();
+  }
   togglePreview() {
     this.setState({ showPreview: !this.state.showPreview });
+  }
+  cancelNoteEdition() {
+    this.props.dispatch(actions.hideNoteEditor());
+  }
+  saveNoteContent() {
+    this.props.dispatch(actions.saveNoteContent(this.props.note, this.state.noteContent));
   }
 
   render() {
@@ -59,14 +74,24 @@ class NoteEditor extends React.Component {
             {this.state.showPreview && (
               <Button icon="pencil" label="Back to edit" color="default" size="medium" onClick={this.togglePreview} />
             )}
-            <Button icon="save" label="Save" color="primary" size="medium" onClick={() => {}} />
+
+            {this.state.noteContent !== this.props.note.content && (
+              <Button icon="x" label="Cancel" color="default" size="medium" onClick={this.cancelNoteEdition} />
+            )}
+
+            <Button icon="save" label="Save" color="primary" size="medium" onClick={this.saveNoteContent} />
           </div>
         </div>
 
         <div id="editor">
           {this.state.showPreview && <NoteView note={{ content: this.state.noteContent }} />}
           {!this.state.showPreview && (
-            <textarea value={this.state.noteContent} onChange={this.handleChange} autoFocus />
+            <textarea
+              value={this.state.noteContent}
+              onChange={this.handleChange}
+              onKeyDown={this.handleKeyDown}
+              autoFocus
+            />
           )}
         </div>
       </div>
@@ -75,7 +100,8 @@ class NoteEditor extends React.Component {
 }
 
 NoteEditor.propTypes = {
+  dispatch: PropTypes.func,
   note: PropTypes.object.isRequired,
 };
 
-export default NoteEditor;
+export default connect()(NoteEditor);

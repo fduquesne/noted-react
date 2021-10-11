@@ -1,4 +1,4 @@
-import { ref, get } from 'firebase/database';
+import { ref, get, set } from 'firebase/database';
 
 import db from '../config/firebase';
 import types from '../constants/reducer-types';
@@ -41,6 +41,14 @@ const actions = {
 
   hideNoteEditor() {
     return dispatch => dispatch({ type: types.HIDE_NOTE_EDITOR });
+  },
+
+  saveNoteContent(note, content) {
+    return dispatch => {
+      set(ref(db, `/notes/${note.id}`), { ...note, content });
+      dispatch({ type: types.SAVE_NOTE_CONTENT, noteId: note.id, content });
+      dispatch({ type: types.HIDE_NOTE_EDITOR });
+    };
   },
 };
 

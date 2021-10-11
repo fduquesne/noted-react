@@ -22,6 +22,14 @@ const reducers = {
   [types.HIDE_NOTE_EDITOR](state) {
     return { ...state, app: { ...state.app, showNoteEditor: false } };
   },
+  [types.SAVE_NOTE_CONTENT](state, { noteId, content }) {
+    const notes = state.notes.all.map(n => {
+      if (n.id !== noteId) return n;
+      return { ...n, content };
+    });
+
+    return { ...state, notes: { ...state.notes, all: notes } };
+  },
 };
 
 export default reducers;
