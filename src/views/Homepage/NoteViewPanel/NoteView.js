@@ -8,7 +8,10 @@ class NoteView extends React.Component {
     const { note } = this.props;
 
     return (
-      <div id="note-view" dangerouslySetInnerHTML={note.content && { __html: marked(sanitizeHtml(note.content)) }} />
+      <div
+        id="note-view"
+        dangerouslySetInnerHTML={{ __html: note.content !== '' ? marked(sanitizeHtml(note.content)) : '' }}
+      />
     );
   }
 }

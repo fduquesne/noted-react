@@ -30,6 +30,9 @@ const reducers = {
 
     return { ...state, notes: { ...state.notes, all: notes } };
   },
+  [types.CREATE_NOTE](state, { currentUser, note }) {
+    return { ...state, currentUser, notes: { ...state.notes, all: [note, ...state.notes.all] } };
+  },
 };
 
 export default reducers;

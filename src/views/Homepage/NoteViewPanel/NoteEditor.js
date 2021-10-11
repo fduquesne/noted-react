@@ -75,10 +75,7 @@ class NoteEditor extends React.Component {
               <Button icon="pencil" label="Back to edit" color="default" size="medium" onClick={this.togglePreview} />
             )}
 
-            {this.state.noteContent !== this.props.note.content && (
-              <Button icon="x" label="Cancel" color="default" size="medium" onClick={this.cancelNoteEdition} />
-            )}
-
+            <Button icon="x" label="Cancel" color="default" size="medium" onClick={this.cancelNoteEdition} />
             <Button icon="save" label="Save" color="primary" size="medium" onClick={this.saveNoteContent} />
           </div>
         </div>
