@@ -11,16 +11,18 @@ class NoteEditor extends React.Component {
 
     this.state = { showPreview: false, noteContent: props.note.content };
 
+    this.handleChange = this.handleChange.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
   }
 
+  handleChange(e) {
+    this.setState({ noteContent: e.target.value });
+  }
   togglePreview() {
     this.setState({ showPreview: !this.state.showPreview });
   }
 
   render() {
-    const handleChange = e => this.setState({ noteContent: e.target.value });
-
     return (
       <div id="note-editor">
         <div id="note-editor-actions">
@@ -55,7 +57,7 @@ class NoteEditor extends React.Component {
               <Button icon="eye" label="Preview" color="default" size="medium" onClick={this.togglePreview} />
             )}
             {this.state.showPreview && (
-              <Button icon="pencil" label="Edit" color="default" size="medium" onClick={this.togglePreview} />
+              <Button icon="pencil" label="Back to edit" color="default" size="medium" onClick={this.togglePreview} />
             )}
             <Button icon="save" label="Save" color="primary" size="medium" onClick={() => {}} />
           </div>
@@ -63,7 +65,9 @@ class NoteEditor extends React.Component {
 
         <div id="editor">
           {this.state.showPreview && <NoteView note={{ content: this.state.noteContent }} />}
-          {!this.state.showPreview && <textarea value={this.state.noteContent} onChange={handleChange} autoFocus />}
+          {!this.state.showPreview && (
+            <textarea value={this.state.noteContent} onChange={this.handleChange} autoFocus />
+          )}
         </div>
       </div>
     );

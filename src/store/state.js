@@ -8,6 +8,7 @@ const state = {
   },
   app: {
     isLoaded: false,
+    showNoteEditor: false,
   },
 };
 

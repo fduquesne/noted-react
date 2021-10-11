@@ -29,7 +29,18 @@ const actions = {
   },
 
   selectNote(noteId) {
-    return dispatch => dispatch({ type: types.SET_SELECTED_NOTE, noteId });
+    return dispatch => {
+      dispatch({ type: types.HIDE_NOTE_EDITOR });
+      dispatch({ type: types.SET_SELECTED_NOTE, noteId });
+    };
+  },
+
+  showNoteEditor() {
+    return dispatch => dispatch({ type: types.SHOW_NOTE_EDITOR });
+  },
+
+  hideNoteEditor() {
+    return dispatch => dispatch({ type: types.HIDE_NOTE_EDITOR });
   },
 };
 

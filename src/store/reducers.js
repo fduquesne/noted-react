@@ -16,6 +16,12 @@ const reducers = {
   [types.SET_ALL_NOTES](state, { notes }) {
     return { ...state, notes: { ...state.notes, all: notes } };
   },
+  [types.SHOW_NOTE_EDITOR](state) {
+    return { ...state, app: { ...state.app, showNoteEditor: true } };
+  },
+  [types.HIDE_NOTE_EDITOR](state) {
+    return { ...state, app: { ...state.app, showNoteEditor: false } };
+  },
 };
 
 export default reducers;

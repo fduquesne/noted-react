@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 import NoteViewHeader from './NoteViewHeader';
 import NoteViewMetadata from './NoteViewMetadata';
-// import NoteView from './NoteView';
+import NoteView from './NoteView';
 import NoteEditor from './NoteEditor';
 
 class NoteViewPanel extends React.Component {
   render() {
-    const { allNotes, selectedNote } = this.props;
+    const { allNotes, selectedNote, showNoteEditor } = this.props;
 
     const note = allNotes.find(n => n.id === selectedNote);
 
@@ -19,8 +19,7 @@ class NoteViewPanel extends React.Component {
           <>
             <NoteViewHeader note={note} />
             <NoteViewMetadata note={note} />
-            {/* <NoteView note={note} /> */}
-            <NoteEditor note={note} />
+            {showNoteEditor ? <NoteEditor note={note} /> : <NoteView note={note} />}
           </>
         )}
       </div>
@@ -31,8 +30,13 @@ class NoteViewPanel extends React.Component {
 NoteViewPanel.propTypes = {
   allNotes: PropTypes.array,
   selectedNote: PropTypes.number,
+  showNoteEditor: PropTypes.bool,
 };
 
-const mapStateToProps = ({ notes }) => ({ allNotes: notes.all, selectedNote: notes.selected });
+const mapStateToProps = state => ({
+  allNotes: state.notes.all,
+  selectedNote: state.notes.selected,
+  showNoteEditor: state.app.showNoteEditor,
+});
 
 export default connect(mapStateToProps)(NoteViewPanel);
