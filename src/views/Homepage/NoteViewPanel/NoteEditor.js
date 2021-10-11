@@ -34,7 +34,7 @@ class NoteEditor extends React.Component {
     this.props.dispatch(actions.hideNoteEditor());
   }
   saveNoteContent() {
-    this.props.dispatch(actions.saveNoteContent(this.props.note, this.state.noteContent));
+    this.props.dispatch(actions.saveNoteContent(this.props.note.id, this.state.noteContent));
   }
 
   render() {

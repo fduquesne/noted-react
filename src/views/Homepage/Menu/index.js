@@ -10,7 +10,7 @@ import ProfilePanel from './ProfilePanel';
 
 class Menu extends React.Component {
   render() {
-    const { dispatch, currentUser, selectedFolder } = this.props;
+    const { dispatch, user, selectedFolder } = this.props;
 
     const selectFolder = id => {
       dispatch(actions.selectFolder(id));
@@ -29,8 +29,8 @@ class Menu extends React.Component {
               selected={selectedFolder === 'my-notes'}
             />
 
-            {currentUser.folders &&
-              currentUser.folders.map(folder => (
+            {user.folders &&
+              user.folders.map(folder => (
                 <MenuItem
                   key={folder.id}
                   title={folder.name}
@@ -55,10 +55,10 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
   dispatch: PropTypes.func,
-  currentUser: PropTypes.object,
+  user: PropTypes.object,
   selectedFolder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-const mapStateToProps = ({ currentUser, selectedFolder }) => ({ currentUser, selectedFolder });
+const mapStateToProps = ({ user, selectedFolder }) => ({ user, selectedFolder });
 
 export default connect(mapStateToProps)(Menu);

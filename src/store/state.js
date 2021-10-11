@@ -1,14 +1,11 @@
 const state = {
-  currentPopup: '',
-  currentUser: undefined,
+  user: undefined,
   selectedFolder: 'all-notes',
-  notes: {
-    all: [],
-    selected: '',
-  },
+  selectedNote: undefined,
   app: {
     isLoaded: false,
     showNoteEditor: false,
+    currentPopup: undefined,
   },
 };
 

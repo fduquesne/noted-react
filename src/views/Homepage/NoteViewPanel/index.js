@@ -9,9 +9,9 @@ import NoteEditor from './NoteEditor';
 
 class NoteViewPanel extends React.Component {
   render() {
-    const { allNotes, selectedNote, showNoteEditor } = this.props;
+    const { notes, selectedNote, showNoteEditor } = this.props;
 
-    const note = allNotes.find(n => n.id === selectedNote);
+    const note = notes && notes.find(n => n.id === selectedNote);
 
     return (
       <div id="note-view-panel">
@@ -28,14 +28,14 @@ class NoteViewPanel extends React.Component {
 }
 
 NoteViewPanel.propTypes = {
-  allNotes: PropTypes.array,
+  notes: PropTypes.array,
   selectedNote: PropTypes.number,
   showNoteEditor: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  allNotes: state.notes.all,
-  selectedNote: state.notes.selected,
+  notes: state.user.notes,
+  selectedNote: state.selectedNote,
   showNoteEditor: state.app.showNoteEditor,
 });
 

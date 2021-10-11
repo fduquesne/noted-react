@@ -10,17 +10,9 @@ const actions = {
       const userSnap = await get(ref(db, '/users'));
       const user = userSnap.val()['1633816282006'];
 
-      dispatch({ type: types.SET_CURRENT_USER, user });
+      dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_FOLDER, folderId: 'my-notes' });
-
-      if (user.notes) {
-        const notesSnap = await Promise.all(user.notes.map(note => get(ref(db, `/notes/${note.id}`))));
-        const notes = notesSnap.map(snap => snap.val());
-
-        dispatch({ type: types.SET_SELECTED_NOTE, noteId: notes[0].id });
-        dispatch({ type: types.SET_ALL_NOTES, notes });
-      }
-
+      dispatch({ type: types.SET_SELECTED_NOTE, noteId: user.notes && user.notes[0].id });
       dispatch({ type: types.SET_APP_LOADED });
     };
   },
@@ -44,10 +36,17 @@ const actions = {
     return dispatch => dispatch({ type: types.HIDE_NOTE_EDITOR });
   },
 
-  saveNoteContent(note, content) {
+  saveNoteContent(noteId, content) {
     return dispatch => {
-      set(ref(db, `/notes/${note.id}`), { ...note, content });
-      dispatch({ type: types.SAVE_NOTE_CONTENT, noteId: note.id, content });
+      const currentUser = { ...store.getState().user };
+      const notes = currentUser.notes.map(note => {
+        if (note.id === noteId) return { ...note, content, updatedAt: Date.now() };
+        return note;
+      });
+
+      const user = { ...currentUser, notes };
+      set(ref(db, `/users/${user.id}`), user);
+      dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.HIDE_NOTE_EDITOR });
     };
   },
@@ -55,21 +54,19 @@ const actions = {
   createNote(title) {
     return dispatch => {
       const timestamp = Date.now();
-      const currentUser = { ...store.getState().currentUser };
+      const currentUser = { ...store.getState().user };
       const note = {
         id: timestamp,
         title,
         content: '',
-        folder: store.getState().selectedFolder,
         updatedAt: timestamp,
-        author: { name: currentUser.name, image: currentUser.image },
+        folder: store.getState().selectedFolder,
       };
+      const notes = currentUser.notes ? [note, ...currentUser.notes] : [note];
 
-      currentUser.notes = [{ id: note.id }, ...currentUser.notes];
-
-      set(ref(db, `/notes/${note.id}`), note);
-      set(ref(db, `/users/${currentUser.id}`), currentUser);
-      dispatch({ type: types.CREATE_NOTE, currentUser, note });
+      const user = { ...currentUser, notes };
+      set(ref(db, `/users/${user.id}`), user);
+      dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: note.id });
       dispatch({ type: types.SHOW_NOTE_EDITOR });
     };

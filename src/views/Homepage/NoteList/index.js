@@ -33,12 +33,10 @@ class NoteList extends React.Component {
   }
 
   render() {
-    const { dispatch, allNotes, currentUser, selectedFolder, selectedNote } = this.props;
+    const { dispatch, user, selectedFolder, selectedNote } = this.props;
 
-    const selectNote = noteId => dispatch(actions.selectNote(noteId));
-
-    const folder = currentUser.folders.find(f => f.id === selectedFolder) || { name: 'My notes' };
-    const noteList = selectedFolder !== 'my-notes' ? allNotes.filter(n => n.folder === selectedFolder) : allNotes;
+    const folder = user.folders.find(f => f.id === selectedFolder) || { name: 'My notes' };
+    const noteList = selectedFolder !== 'my-notes' ? user.notes.filter(n => n.folder === selectedFolder) : user.notes;
 
     return (
       <div id="note-list">
@@ -68,14 +66,15 @@ class NoteList extends React.Component {
         </div>
 
         <div id="notes">
-          {noteList.map(note => (
-            <NoteItem
-              key={note.id}
-              note={note}
-              onClick={() => selectNote(note.id)}
-              selected={note.id === selectedNote}
-            />
-          ))}
+          {noteList &&
+            noteList.map(note => (
+              <NoteItem
+                key={note.id}
+                note={note}
+                onClick={() => dispatch(actions.selectNote(note.id))}
+                selected={note.id === selectedNote}
+              />
+            ))}
         </div>
       </div>
     );
@@ -84,17 +83,15 @@ class NoteList extends React.Component {
 
 NoteList.propTypes = {
   dispatch: PropTypes.func,
-  allNotes: PropTypes.array,
-  currentUser: PropTypes.object,
+  user: PropTypes.object,
   selectedFolder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   selectedNote: PropTypes.number,
 };
 
-const mapStateToProps = ({ notes, currentUser, selectedFolder }) => ({
-  allNotes: notes.all,
-  currentUser,
+const mapStateToProps = ({ user, selectedFolder, selectedNote }) => ({
+  user,
   selectedFolder,
-  selectedNote: notes.selected,
+  selectedNote,
 });
 
 export default connect(mapStateToProps)(NoteList);

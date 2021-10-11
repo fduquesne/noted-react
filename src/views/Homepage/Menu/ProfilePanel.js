@@ -6,12 +6,12 @@ import { Avatar, Button } from '../../../components';
 
 class ProfilePanel extends React.Component {
   render() {
-    const { currentUser } = this.props;
+    const { user } = this.props;
 
     return (
       <div id="profile-panel">
-        <Avatar user={currentUser} size="medium" />
-        <div id="profile-name">{currentUser.name}</div>
+        <Avatar user={user} size="medium" />
+        <div id="profile-name">{user.name}</div>
         <div id="profile-button">
           <Button icon="chevron-down" color="default" size="small" onClick={() => {}} rounded />
         </div>
@@ -21,9 +21,9 @@ class ProfilePanel extends React.Component {
 }
 
 ProfilePanel.propTypes = {
-  currentUser: PropTypes.object,
+  user: PropTypes.object,
 };
 
-const mapStateToProps = ({ currentUser }) => ({ currentUser });
+const mapStateToProps = ({ user }) => ({ user });
 
 export default connect(mapStateToProps)(ProfilePanel);
