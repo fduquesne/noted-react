@@ -13,6 +13,12 @@ const reducers = {
   [types.SET_SELECTED_NOTE](state, { noteId }) {
     return { ...state, selectedNote: noteId };
   },
+  [types.SHOW_POPUP](state, { popup }) {
+    return { ...state, app: { ...state.app, currentPopup: popup } };
+  },
+  [types.CLOSE_POPUP](state) {
+    return { ...state, app: { ...state.app, currentPopup: undefined } };
+  },
   [types.SHOW_NOTE_EDITOR](state) {
     return { ...state, app: { ...state.app, showNoteEditor: true } };
   },

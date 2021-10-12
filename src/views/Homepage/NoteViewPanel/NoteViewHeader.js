@@ -22,6 +22,7 @@ class NoteEditorHeader extends React.Component {
             onClick={() => dispatch(actions.showNoteEditor())}
           />
         )}
+        <Button icon="trash" color="default" size="medium" onClick={() => dispatch(actions.showRemoveNotePopup())} />
       </div>
     );
   }

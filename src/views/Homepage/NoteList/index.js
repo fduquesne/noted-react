@@ -33,7 +33,7 @@ class NoteList extends React.Component {
   }
 
   render() {
-    const { dispatch, user, selectedFolder, selectedNote } = this.props;
+    const { user, selectedFolder, selectedNote } = this.props;
 
     const folder = user.folders.find(f => f.id === selectedFolder) || { name: 'My notes' };
     const noteList = selectedFolder !== 'my-notes' ? user.notes.filter(n => n.folder === selectedFolder) : user.notes;
@@ -66,15 +66,7 @@ class NoteList extends React.Component {
         </div>
 
         <div id="notes">
-          {noteList &&
-            noteList.map(note => (
-              <NoteItem
-                key={note.id}
-                note={note}
-                onClick={() => dispatch(actions.selectNote(note.id))}
-                selected={note.id === selectedNote}
-              />
-            ))}
+          {noteList && noteList.map(note => <NoteItem key={note.id} note={note} selected={note.id === selectedNote} />)}
         </div>
       </div>
     );

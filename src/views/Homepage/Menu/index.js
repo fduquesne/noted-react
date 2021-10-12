@@ -12,9 +12,7 @@ class Menu extends React.Component {
   render() {
     const { dispatch, user, selectedFolder } = this.props;
 
-    const selectFolder = id => {
-      dispatch(actions.selectFolder(id));
-    };
+    const selectFolder = id => dispatch(actions.selectFolder(id));
 
     return (
       <div id="menu">

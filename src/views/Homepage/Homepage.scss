@@ -130,6 +130,7 @@
         background: $color-grey-very-light;
         color: $color-black-very-light;
         cursor: pointer;
+        transition: all ease 0.3s;
 
         &:last-child {
           margin-bottom: 0;
@@ -205,12 +206,21 @@
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+        flex: 1;
         height: 40px;
         margin-right: 30px;
         font-family: 'SF Pro Semibold';
         font-size: 30px;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      .button {
+        margin-left: 10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
 
