@@ -31,6 +31,10 @@ const actions = {
     };
   },
 
+  showCreateFolderPopup() {
+    return dispatch => dispatch({ type: types.SHOW_POPUP, popup: popupTypes.CREATE_FOLDER });
+  },
+
   showRemoveNotePopup() {
     return dispatch => dispatch({ type: types.SHOW_POPUP, popup: popupTypes.DELETE_NOTE });
   },
@@ -45,6 +49,22 @@ const actions = {
 
   hideNoteEditor() {
     return dispatch => dispatch({ type: types.HIDE_NOTE_EDITOR });
+  },
+
+  createFolder(name, icon) {
+    return dispatch => {
+      if (name !== '') {
+        const id = Date.now();
+        const currentUser = { ...store.getState().user };
+        const folders = [...currentUser.folders, { id, name, icon }];
+
+        const user = { ...currentUser, folders };
+        set(ref(db, `/users/${user.id}`), user);
+        dispatch({ type: types.SET_USER, user });
+      }
+
+      dispatch({ type: types.CLOSE_POPUP });
+    };
   },
 
   saveNoteContent(noteId, content) {

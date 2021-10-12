@@ -28,7 +28,7 @@
   }
 
   .popup {
-    width: 400px;
+    width: 0;
     border-radius: 10px;
     box-shadow: 0 0 20px $color-grey;
     background: $color-white;
@@ -36,14 +36,83 @@
     z-index: 100;
     transform: scale(75%);
     -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 
     &.show {
+      display: flex;
+      flex-direction: column;
+      display: block;
       opacity: 1;
       transform: scale(100%);
+
+      &.default {
+        width: 550px;
+      }
+
+      &.alert {
+        width: 400px;
+      }
     }
 
-    .popup-icon {
+    // DEFAULT POPUP
+    & > .popup-header {
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 15px;
+      border-bottom: 2px solid $color-grey;
+    }
+
+    & > .popup-body {
+      flex: 1;
+      padding: 15px;
+
+      #label-icon-selector {
+        margin-bottom: 10px;
+        font-size: 15px;
+      }
+
+      #icon-selector {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        cursor: pointer;
+
+        .icon-option {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+          padding: 5px;
+          border-radius: 5px;
+          color: $color-black-light;
+
+          &.selected {
+            border: 2px solid $color-black;
+            color: $color-black;
+          }
+        }
+      }
+    }
+
+    & > .popup-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 60px;
+      padding: 0 15px;
+      border-top: 2px solid $color-grey;
+
+      .button {
+        margin-left: 10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    // ALERT POPUP
+    & > .popup-icon {
       display: flex;
       justify-content: center;
       width: 100%;
@@ -63,14 +132,14 @@
       }
     }
 
-    .popup-title {
+    & > .popup-title {
       display: flex;
       justify-content: center;
       color: $color-black-light;
       font-size: 30px;
     }
 
-    .popup-description {
+    & > .popup-description {
       display: flex;
       justify-content: center;
       padding: 10px 50px 30px;
@@ -78,7 +147,7 @@
       text-align: center;
     }
 
-    .popup-actions {
+    & > .popup-actions {
       display: flex;
       justify-content: center;
       padding-bottom: 20px;

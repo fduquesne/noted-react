@@ -1,3 +1,4 @@
 export default {
+  CREATE_FOLDER: 'CREATE_FOLDER',
   DELETE_NOTE: 'DELETE_NOTE',
 };

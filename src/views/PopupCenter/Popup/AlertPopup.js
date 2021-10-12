@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 
 import actions from '../../../store/actions';
 
+import Popup from './Popup';
+
 import { Button, Icon } from '../../../components';
 
-class Popup extends React.Component {
+class AlertPopup extends React.Component {
   render() {
     const { dispatch, icon, title, description, type, show, submit } = this.props;
 
     return (
-      <div className={cx('popup', { show })}>
+      <Popup show={show} type="alert">
         <div className={cx('popup-icon', type)}>
           <Icon name={icon} />
         </div>
@@ -34,12 +36,12 @@ class Popup extends React.Component {
             onClick={() => dispatch(actions.deleteNote())}
           />
         </div>
-      </div>
+      </Popup>
     );
   }
 }
 
-Popup.propTypes = {
+AlertPopup.propTypes = {
   dispatch: PropTypes.func,
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -49,4 +51,4 @@ Popup.propTypes = {
   submit: PropTypes.object.isRequired,
 };
 
-export default connect()(Popup);
+export default connect()(AlertPopup);

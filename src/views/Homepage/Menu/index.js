@@ -9,6 +9,12 @@ import MenuItem from './MenuItem';
 import ProfilePanel from './ProfilePanel';
 
 class Menu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { newFolderTitle: '', showInputToCreateFolder: true };
+  }
+
   render() {
     const { dispatch, user, selectedFolder } = this.props;
 
@@ -42,7 +48,7 @@ class Menu extends React.Component {
 
         <div id="menu-footer">
           <MenuGroup>
-            <MenuItem title="Add new folder" icon="plus" onClick={() => {}} />
+            <MenuItem title="Add new folder" icon="plus" onClick={() => dispatch(actions.showCreateFolderPopup())} />
             <MenuItem title="Settings" icon="settings" onClick={() => {}} />
           </MenuGroup>
         </div>

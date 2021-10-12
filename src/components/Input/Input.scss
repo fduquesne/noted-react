@@ -1,13 +1,20 @@
 @import '../../assets/scss/colors';
 
 .input {
-  display: flex;
-  align-items: center;
   width: 100%;
-  border: 2px solid $color-black-very-light;
-  background: $color-grey-light;
 
-  &.big {
+  &.medium .input-container {
+    height: 40px;
+    padding: 5px 15px;
+    border-radius: 4px;
+
+    input {
+      font-family: 'SF Pro Semibold';
+      font-size: 16px;
+    }
+  }
+
+  &.big .input-container {
     height: 55px;
     padding: 5px 15px;
     border-radius: 5px;
@@ -18,21 +25,33 @@
     }
   }
 
-  input {
-    flex: 1;
-    height: 100%;
-    border: none;
-    background: transparent;
-
-    &::placeholder {
-      color: $color-black-very-light;
-    }
+  .input-label {
+    margin-bottom: 10px;
+    font-size: 15px;
   }
 
-  .icon {
-    width: 30px;
-    height: 30px;
-    padding: 3px;
-    color: $color-grey;
+  .input-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid $color-black-very-light;
+    background: $color-grey-light;
+
+    input {
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent;
+
+      &::placeholder {
+        color: $color-black-very-light;
+      }
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      padding: 3px;
+      color: $color-grey;
+    }
   }
 }

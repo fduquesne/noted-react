@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 import actions from '../../store/actions';
 
-import Popup from './Popup';
+import AlertPopup from './Popup/AlertPopup';
 
 class RemoveNotePopup extends React.Component {
   render() {
     const { dispatch, show } = this.props;
 
     return (
-      <Popup
+      <AlertPopup
         icon="x"
         title="Are you sure?"
         description="Do you really want to delete this note? This process cannot be undone."

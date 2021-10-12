@@ -8,19 +8,23 @@ import './Input.scss';
 
 class Input extends React.Component {
   render() {
-    const { autofocus, icon, placeholder, value, size, onChange, onKeyDown } = this.props;
+    const { autofocus, icon, label, placeholder, value, size, onChange, onKeyDown } = this.props;
 
     return (
       <div className={cx(['input', size])}>
-        <input
-          type="text"
-          placeholder={placeholder}
-          autoFocus={autofocus}
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-        />
-        {icon && <Icon name={icon} />}
+        {label && <div className="input-label">{label}</div>}
+
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder={placeholder}
+            autoFocus={autofocus}
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+          />
+          {icon && <Icon name={icon} />}
+        </div>
       </div>
     );
   }
@@ -29,6 +33,7 @@ class Input extends React.Component {
 Input.propTypes = {
   autofocus: PropTypes.bool,
   icon: PropTypes.string,
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
