@@ -30,7 +30,10 @@ class NoteItem extends React.Component {
       >
         <div className="note-item-updated-at">{formatDate(note.updatedAt)}</div>
         <div className="note-item-title">{note.title}</div>
-        <div className="note-item-content">{note.content}</div>
+        <div
+          className="note-item-content"
+          dangerouslySetInnerHTML={{ __html: note.content.trim().replaceAll('\n', '<br>') }}
+        ></div>
         <div className="note-item-tags">
           {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
         </div>

@@ -11,6 +11,7 @@ const actions = {
       const userSnap = await get(ref(db, '/users'));
       const user = userSnap.val()['1633816282006'];
       if (!user.notes) user.notes = [];
+      if (!user.folders) user.folders = [];
 
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_FOLDER, folderId: 'my-notes' });

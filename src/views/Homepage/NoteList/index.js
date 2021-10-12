@@ -50,7 +50,7 @@ class NoteList extends React.Component {
             label="Add new note"
             color="default"
             size="big"
-            onClick={() => this.setState({ showInputToCreateNote: true })}
+            onClick={() => this.setState({ showInputToCreateNote: !this.state.showInputToCreateNote })}
           />
 
           {this.state.showInputToCreateNote && (

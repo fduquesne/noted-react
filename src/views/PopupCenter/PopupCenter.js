@@ -14,9 +14,6 @@ class PopupCenter extends React.Component {
   render() {
     const { dispatch, currentPopup } = this.props;
 
-    console.log('JE PASSE');
-    console.log(currentPopup);
-
     return (
       <div id="popup-center" className={cx({ show: !!currentPopup })}>
         <div id="blur" onClick={() => dispatch(actions.closePopup())} />
