@@ -13,7 +13,7 @@ class ProfilePanel extends React.Component {
         <Avatar user={user} size="medium" />
         <div id="profile-name">{user.name}</div>
         <div id="profile-button">
-          <Button icon="chevron-down" color="default" size="small" onClick={() => {}} rounded />
+          <Button icon="logout" color="default" size="small" onClick={() => {}} rounded />
         </div>
       </div>
     );
