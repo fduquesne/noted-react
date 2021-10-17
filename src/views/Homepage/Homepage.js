@@ -8,6 +8,8 @@ import Menu from './Menu';
 import NoteList from './NoteList';
 import NoteViewPanel from './NoteViewPanel';
 
+import { LoadingPage } from '../../views';
+
 import './Homepage.scss';
 
 class Homepage extends React.Component {
@@ -18,7 +20,7 @@ class Homepage extends React.Component {
   render() {
     const { isAppLoaded } = this.props;
 
-    if (!isAppLoaded) return <></>;
+    if (!isAppLoaded) return <LoadingPage />;
 
     return (
       <div id="homepage">
