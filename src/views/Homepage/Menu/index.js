@@ -8,7 +8,7 @@ import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import ProfilePanel from './ProfilePanel';
 
-import { Button } from '../../../components';
+import { Button, Icon } from '../../../components';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -24,8 +24,12 @@ class Menu extends React.Component {
 
     return (
       <div id="menu">
-        <ProfilePanel />
-
+        <div id="menu-header">
+          <div id="logo">
+            <Icon name="pencil" />
+          </div>
+          <div id="title">Noted.</div>
+        </div>
         <div id="menu-group-container">
           <MenuGroup>
             <MenuItem
@@ -60,8 +64,8 @@ class Menu extends React.Component {
         <div id="menu-footer">
           <MenuGroup>
             <MenuItem title="Add new folder" icon="plus" onClick={() => dispatch(actions.showCreateFolderPopup())} />
-            <MenuItem title="Settings" icon="settings" onClick={() => {}} />
           </MenuGroup>
+          <ProfilePanel />
         </div>
       </div>
     );

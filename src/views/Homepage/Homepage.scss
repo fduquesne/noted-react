@@ -16,11 +16,32 @@
     height: 100%;
     background: $color-grey-very-light;
 
+    #menu-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 35px;
+
+      #logo {
+        margin-right: 10px;
+        padding: 7px;
+        border-radius: 10px 10px 10px 3px;
+        background: $color-purple;
+        color: $color-white;
+      }
+
+      #title {
+        font-family: 'SF Pro Semibold';
+        font-size: 18px;
+      }
+    }
+
     #profile-panel {
       display: flex;
       align-items: center;
       width: 100%;
       padding: 35px;
+      border-top: 1px solid $color-grey;
 
       #profile-name {
         display: flex;
