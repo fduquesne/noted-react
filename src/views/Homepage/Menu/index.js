@@ -8,6 +8,8 @@ import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import ProfilePanel from './ProfilePanel';
 
+import { Button } from '../../../components';
+
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +43,16 @@ class Menu extends React.Component {
                   icon={folder.icon}
                   onClick={() => selectFolder(folder.id)}
                   selected={selectedFolder === folder.id}
-                />
+                >
+                  <div className="actions">
+                    <Button
+                      icon="trash"
+                      color="white"
+                      size="small"
+                      onClick={() => dispatch(actions.showRemoveFolderPopup())}
+                    />
+                  </div>
+                </MenuItem>
               ))}
           </MenuGroup>
         </div>

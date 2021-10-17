@@ -69,14 +69,28 @@
             color: $color-black;
           }
 
+          &:hover .actions {
+            opacity: 1;
+          }
+
           .menu-item-icon {
             width: 20px;
             height: 100%;
           }
 
           .menu-item-title {
+            flex: 1;
             padding-left: 20px;
             font-size: 15px;
+          }
+
+          .actions {
+            opacity: 0;
+            transition: opacity ease 0.3s;
+
+            .button:hover {
+              color: $color-danger;
+            }
           }
         }
       }

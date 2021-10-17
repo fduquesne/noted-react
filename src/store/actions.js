@@ -39,6 +39,10 @@ const actions = {
     return dispatch => dispatch({ type: types.SHOW_POPUP, popup: popupTypes.DELETE_NOTE });
   },
 
+  showRemoveFolderPopup() {
+    return dispatch => dispatch({ type: types.SHOW_POPUP, popup: popupTypes.DELETE_FOLDER });
+  },
+
   closePopup() {
     return dispatch => dispatch({ type: types.CLOSE_POPUP });
   },
@@ -116,6 +120,24 @@ const actions = {
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: nextNote && nextNote.id });
       dispatch({ type: types.HIDE_NOTE_EDITOR });
+      dispatch({ type: types.CLOSE_POPUP });
+    };
+  },
+
+  deleteFolder() {
+    return dispatch => {
+      const currentUser = { ...store.getState().user };
+      const selectedFolder = store.getState().selectedFolder;
+      const folders = currentUser.folders.filter(f => f.id !== selectedFolder);
+      const notes = currentUser.notes.map(n => {
+        if (n.folder === selectedFolder) return { ...n, folder: 'my-notes' };
+        return n;
+      });
+
+      const user = { ...currentUser, folders, notes };
+      set(ref(db, `/users/${user.id}`), user);
+      dispatch({ type: types.SET_USER, user });
+      dispatch({ type: types.SET_SELECTED_FOLDER, folderId: 'my-notes' });
       dispatch({ type: types.CLOSE_POPUP });
     };
   },

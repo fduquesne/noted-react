@@ -28,13 +28,7 @@ class AlertPopup extends React.Component {
             size="medium"
             onClick={() => dispatch(actions.closePopup())}
           />
-          <Button
-            icon={submit.icon}
-            label={submit.name}
-            color={type}
-            size="medium"
-            onClick={() => dispatch(actions.deleteNote())}
-          />
+          <Button icon={submit.icon} label={submit.name} color={type} size="medium" onClick={submit.handle} />
         </div>
       </Popup>
     );

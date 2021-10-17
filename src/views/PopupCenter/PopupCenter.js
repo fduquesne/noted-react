@@ -8,6 +8,7 @@ import actions from '../../store/actions';
 
 import CreateFolderPopup from './CreateFolderPopup';
 import RemoveNotePopup from './RemoveNotePopup';
+import RemoveFolderPopup from './RemoveFolderPopup';
 
 import './PopupCenter.scss';
 
@@ -21,6 +22,7 @@ class PopupCenter extends React.Component {
 
         <CreateFolderPopup show={currentPopup === types.CREATE_FOLDER} />
         <RemoveNotePopup show={currentPopup === types.DELETE_NOTE} />
+        <RemoveFolderPopup show={currentPopup === types.DELETE_FOLDER} />
       </div>
     );
   }
