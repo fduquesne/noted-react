@@ -65,6 +65,7 @@ const actions = {
         const user = { ...currentUser, folders };
         set(ref(db, `/users/${user.id}`), user);
         dispatch({ type: types.SET_USER, user });
+        dispatch({ type: types.SET_SELECTED_FOLDER, folderId: id });
       }
 
       dispatch({ type: types.CLOSE_POPUP });
