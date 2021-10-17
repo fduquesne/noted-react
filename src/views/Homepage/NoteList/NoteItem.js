@@ -34,9 +34,7 @@ class NoteItem extends React.Component {
           className="note-item-content"
           dangerouslySetInnerHTML={{ __html: note.content.trim().replaceAll('\n', '<br>') }}
         ></div>
-        <div className="note-item-tags">
-          {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
-        </div>
+        <div className="note-item-tags">{note.tags && note.tags.map(tag => <Tag key={tag} label={tag} />)}</div>
       </div>
     );
   }

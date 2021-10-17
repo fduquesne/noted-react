@@ -25,6 +25,15 @@ const reducers = {
   [types.HIDE_NOTE_EDITOR](state) {
     return { ...state, app: { ...state.app, showNoteEditor: false } };
   },
+  [types.SET_TAGS_VALUE](state, { value }) {
+    return { ...state, app: { ...state.app, tagsValue: value } };
+  },
+  [types.SHOW_TAGS_INPUT](state) {
+    return { ...state, app: { ...state.app, showTagsInput: true } };
+  },
+  [types.HIDE_TAGS_INPUT](state) {
+    return { ...state, app: { ...state.app, showTagsInput: false } };
+  },
 };
 
 export default reducers;

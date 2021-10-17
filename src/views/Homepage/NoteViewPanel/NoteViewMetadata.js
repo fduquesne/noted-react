@@ -1,25 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { Button, Tag } from '../../../components';
+import actions from '../../../store/actions';
+
+import { Button, Input, Tag } from '../../../components';
 
 class NoteEditorMetadata extends React.Component {
-  constructor() {
-    super();
-
-    this.showNoteTagsUpdatePopup = this.showNoteTagsUpdatePopup.bind(this);
-  }
-
-  showNoteTagsUpdatePopup() {
-    console.log('UPDATE NOTE TAGS');
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    const { note } = this.props;
+    const { dispatch, note, tagsValue, showTagsInput } = this.props;
 
     const formatDate = timestamp => {
       const date = new Date(Number(timestamp));
       return `${date.toDateString()}, ${date.getHours()}:${date.getMinutes()}`;
+    };
+
+    const handleKeyDown = e => {
+      if (e.key === 'Escape') dispatch(actions.hideTagsInput());
+      if (e.key === 'Enter') dispatch(actions.saveTags());
     };
 
     return (
@@ -31,15 +33,28 @@ class NoteEditorMetadata extends React.Component {
         <div className="note-metadata">
           <div className="note-metadata-label">Tags</div>
           <div className="note-metadata-value">
-            {note.tags && note.tags.map(tag => <Tag key={tag.label} label={tag.label} />)}
+            {showTagsInput ? (
+              <Input
+                value={tagsValue}
+                placeholder="to-do, christmas-gifts, ..."
+                size="medium"
+                onChange={e => dispatch(actions.setTagsValue(e.target.value))}
+                onKeyDown={handleKeyDown}
+                autofocus
+              />
+            ) : (
+              <>
+                {note.tags && note.tags.map(tag => <Tag key={tag} label={tag} />)}
 
-            <Button
-              icon="plus"
-              label="Add new tag"
-              color="default"
-              size="small"
-              onClick={this.showNoteTagsUpdatePopup}
-            />
+                <Button
+                  icon="plus"
+                  label="Add new tag"
+                  color="default"
+                  size="small"
+                  onClick={() => dispatch(actions.showTagsInput())}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -48,7 +63,12 @@ class NoteEditorMetadata extends React.Component {
 }
 
 NoteEditorMetadata.propTypes = {
+  dispatch: PropTypes.func,
   note: PropTypes.object.isRequired,
+  tagsValue: PropTypes.string,
+  showTagsInput: PropTypes.bool,
 };
 
-export default NoteEditorMetadata;
+const mapStateToProps = state => ({ showTagsInput: state.app.showTagsInput, tagsValue: state.app.tagsValue });
+
+export default connect(mapStateToProps)(NoteEditorMetadata);

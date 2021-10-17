@@ -16,6 +16,10 @@ const actions = {
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_FOLDER, folderId: 'my-notes' });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: user.notes[0] && user.notes[0].id });
+      dispatch({
+        type: types.SET_TAGS_VALUE,
+        value: user.notes[0] && user.notes[0].tags ? user.notes[0].tags.join(', ') : '',
+      });
       dispatch({ type: types.SET_APP_LOADED });
     };
   },
@@ -26,8 +30,13 @@ const actions = {
 
   selectNote(noteId) {
     return dispatch => {
+      const currentUser = store.getState().user;
+      const note = currentUser.notes.find(n => n.id === noteId);
+
       dispatch({ type: types.HIDE_NOTE_EDITOR });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId });
+      dispatch({ type: types.HIDE_TAGS_INPUT });
+      dispatch({ type: types.SET_TAGS_VALUE, value: note.tags ? note.tags.join(', ') : '' });
     };
   },
 
@@ -75,10 +84,9 @@ const actions = {
   saveNoteContent(noteId, content) {
     return dispatch => {
       const currentUser = { ...store.getState().user };
-      const notes = currentUser.notes.map(note => {
-        if (note.id === noteId) return { ...note, content, updatedAt: Date.now() };
-        return note;
-      });
+      const notes = currentUser.notes.map(note =>
+        note.id === noteId ? { ...note, content, updatedAt: Date.now() } : note,
+      );
 
       const user = { ...currentUser, notes };
       set(ref(db, `/users/${user.id}`), user);
@@ -105,6 +113,8 @@ const actions = {
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: note.id });
       dispatch({ type: types.SHOW_NOTE_EDITOR });
+      dispatch({ type: types.HIDE_TAGS_INPUT });
+      dispatch({ type: types.SET_TAGS_VALUE, value: '' });
     };
   },
 
@@ -121,6 +131,8 @@ const actions = {
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: nextNote && nextNote.id });
       dispatch({ type: types.HIDE_NOTE_EDITOR });
+      dispatch({ type: types.HIDE_TAGS_INPUT });
+      dispatch({ type: types.SET_TAGS_VALUE, value: nextNote.tags ? nextNote.tags.join(', ') : '' });
       dispatch({ type: types.CLOSE_POPUP });
     };
   },
@@ -130,16 +142,55 @@ const actions = {
       const currentUser = { ...store.getState().user };
       const selectedFolder = store.getState().selectedFolder;
       const folders = currentUser.folders.filter(f => f.id !== selectedFolder);
-      const notes = currentUser.notes.map(n => {
-        if (n.folder === selectedFolder) return { ...n, folder: 'my-notes' };
-        return n;
-      });
+      const notes = currentUser.notes.map(n => (n.folder === selectedFolder ? { ...n, folder: 'my-notes' } : n));
 
       const user = { ...currentUser, folders, notes };
       set(ref(db, `/users/${user.id}`), user);
       dispatch({ type: types.SET_USER, user });
       dispatch({ type: types.SET_SELECTED_FOLDER, folderId: 'my-notes' });
       dispatch({ type: types.CLOSE_POPUP });
+    };
+  },
+
+  saveTags() {
+    return dispatch => {
+      const currentUser = { ...store.getState().user };
+      const selectedNote = store.getState().selectedNote;
+      const tagsValue = store.getState().app.tagsValue;
+      const tags = tagsValue
+        .split(',')
+        .map(t => t.trim())
+        .filter(t => t !== '');
+      const notes = currentUser.notes.map(n => (n.id === selectedNote ? { ...n, tags } : n));
+
+      const user = { ...currentUser, notes };
+      set(ref(db, `/users/${user.id}`), user);
+      dispatch({ type: types.SET_USER, user });
+      dispatch({ type: types.HIDE_TAGS_INPUT });
+    };
+  },
+
+  showTagsInput() {
+    return dispatch => {
+      const currentUser = store.getState().user;
+      const selectedNote = store.getState().selectedNote;
+      const note = currentUser.notes.find(n => n.id === selectedNote);
+      const value = note.tags ? note.tags.join(', ') : '';
+
+      dispatch({ type: types.SET_TAGS_VALUE, value });
+      dispatch({ type: types.SHOW_TAGS_INPUT });
+    };
+  },
+
+  hideTagsInput() {
+    return dispatch => {
+      dispatch({ type: types.HIDE_TAGS_INPUT });
+    };
+  },
+
+  setTagsValue(value) {
+    return dispatch => {
+      dispatch({ type: types.SET_TAGS_VALUE, value });
     };
   },
 };

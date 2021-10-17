@@ -271,7 +271,7 @@
 
       .note-metadata {
         display: flex;
-        height: 40px;
+        min-height: 40px;
         align-items: center;
 
         .note-metadata-label {
@@ -282,6 +282,7 @@
         .note-metadata-value {
           display: flex;
           flex: 1;
+          flex-wrap: wrap;
           align-items: center;
 
           .avatar {

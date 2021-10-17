@@ -5,6 +5,8 @@ const state = {
   app: {
     isLoaded: false,
     showNoteEditor: false,
+    showTagsInput: false,
+    tagsValue: '',
     currentPopup: undefined,
   },
 };
