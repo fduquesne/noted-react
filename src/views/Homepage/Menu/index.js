@@ -6,7 +6,6 @@ import actions from '../../../store/actions';
 
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
-import ProfilePanel from './ProfilePanel';
 
 import { Button, Icon } from '../../../components';
 
@@ -65,7 +64,6 @@ class Menu extends React.Component {
           <MenuGroup>
             <MenuItem title="Add new folder" icon="plus" onClick={() => dispatch(actions.showCreateFolderPopup())} />
           </MenuGroup>
-          <ProfilePanel />
         </div>
       </div>
     );

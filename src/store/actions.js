@@ -132,7 +132,7 @@ const actions = {
       dispatch({ type: types.SET_SELECTED_NOTE, noteId: nextNote && nextNote.id });
       dispatch({ type: types.HIDE_NOTE_EDITOR });
       dispatch({ type: types.HIDE_TAGS_INPUT });
-      dispatch({ type: types.SET_TAGS_VALUE, value: nextNote.tags ? nextNote.tags.join(', ') : '' });
+      dispatch({ type: types.SET_TAGS_VALUE, value: nextNote && nextNote.tags ? nextNote.tags.join(', ') : '' });
       dispatch({ type: types.CLOSE_POPUP });
     };
   },
